@@ -262,7 +262,6 @@ nginx -s reload
 
 小程序wxlite/config.js文件中的`serverUrl`、`roomServiceUrl`修改成 *https://您自己的域名/roomservice/*
 
-
 ## 附录
 
 ### 项目结构
