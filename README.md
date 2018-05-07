@@ -205,9 +205,9 @@ Config.java中的配置修改好之后打成war包。
 
 ### nginx 配置
 如果您已经有**域名**以及域名对应的**SSL证书**存放在`/data/release/nginx/`目录下，请将下面配置内容中的
-[1] 替换成您自己的域名，
-[2-1]替换成SSL证书的crt文件名，
-[2-2]替换成SSL证书的key文件名。
+- [1] 替换成您自己的域名，
+- [2-1] 替换成SSL证书的crt文件名，
+- [2-2] 替换成SSL证书的key文件名。
 ```
 upstream app_weapp {
     server localhost:5757;
