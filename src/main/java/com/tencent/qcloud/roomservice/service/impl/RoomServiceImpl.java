@@ -224,8 +224,14 @@ public class RoomServiceImpl implements RoomService {
                 log.error("addPusher群组创建失败：" + "userID：" + userID + ", roomID：" + roomID);
                 return rsp;
             }
+
+            String roomInfo = "";
+            if (req.getRoomInfo() != null) {
+                roomInfo = req.getRoomInfo();
+            }
+            
             // 再创建房间
-            roomMgr.creatRoom(userID, "", type);
+            roomMgr.creatRoom(userID, roomInfo, type);
 
             // 进房
             StreamIDS ids = liveUtil.getStreamIdFromPushUrl(pushURL);
