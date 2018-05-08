@@ -114,7 +114,13 @@ public class LiveUtil {
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("http://fcgi.video.qcloud.com/common_access" + getQueryString());
 
-        HttpEntity<String> entity = new HttpEntity<String>(JSONObject.valueToString(map.get("mergeParams")), headers);
+        HttpEntity<String> entity;
+        Object param = map.get("mergeParams");
+        if (param instanceof String) {
+            entity = new HttpEntity<String>((String) param, headers);
+        } else {
+            entity = new HttpEntity<String>(JSONObject.valueToString(param), headers);
+        }
 
         ResponseEntity<String> response = restTemplate.exchange(
                 builder.build().encode().toUri(),
