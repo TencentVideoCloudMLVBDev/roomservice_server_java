@@ -190,6 +190,13 @@ public class Config {
         // 最大观众列表长度
         public final static int maxAudiencesLen = 30;
     }
+    
+    /**
+     * 创建者退出的时候是否需要删除房间
+     * 默认false。表示房间所有成员是对等的，第一个进房的人退出并不会销毁房间，只有房间没人的时候才会销毁房间。
+     * 此配置项只针对双人和多人实时音视频
+     */
+    public final static boolean isCreatorDestroyRoom = false;
 }
 ```
 配置修改好之后打成war包。

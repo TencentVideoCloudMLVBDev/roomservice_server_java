@@ -321,19 +321,19 @@ public class RoomServiceImpl implements RoomService {
             return rsp;
         }
 
-//        if (roomMgr.isRoomCreator(roomID, userID, type)) {
-//            roomMgr.delRoom(roomID, type);
-//            imMgr.destroyGroup(roomID);
-//        } else
-        if(roomMgr.isMember(roomID, userID, type)) {
+        if (type != RoomMgr.LIVE_ROOM && Config.isCreatorDestroyRoom && roomMgr.isRoomCreator(roomID, userID, type)) {
+            roomMgr.delRoom(roomID, type);
+            imMgr.destroyGroup(roomID);
+        } else if(roomMgr.isMember(roomID, userID, type)) {
             roomMgr.delPusher(roomID, userID, type);
             // notify
             imMgr.notifyPushersChange(roomID);
-        }
 
-        if (roomMgr.getMemberCnt(roomID, type) == 0) {
-            roomMgr.delRoom(roomID, type);
-            imMgr.destroyGroup(roomID);
+
+            if (roomMgr.getMemberCnt(roomID, type) == 0) {
+                roomMgr.delRoom(roomID, type);
+                imMgr.destroyGroup(roomID);
+            }
         }
 
         return rsp;
