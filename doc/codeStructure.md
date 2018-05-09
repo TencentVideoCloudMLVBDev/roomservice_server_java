@@ -1,78 +1,79 @@
 ## 项目结构
 ```
 roomserver
-├── README.md
-├── pom.xml
+├── README.md                 //项目总体说明文档
+├── pom.xml                   //maven 依赖配置文件
 └── src/main
     ├── java/com/tencent/qcloud/roomservice
     │   ├── common
-    │   │   └── Config.java
+    │   │   ├── CORSFilter.java           //跨域设置类
+    │   │   └── Config.java               //后台配置，需要修改这里
     │   ├── controller
-    │   │   ├── DoubleRoom.java
-    │   │   ├── LiveRoom.java
-    │   │   ├── MultiRoom.java
-    │   │   └── Util.java
+    │   │   ├── DoubleRoom.java           //双人房间后台协议总入口
+    │   │   ├── LiveRoom.java             //直播房间后台协议总入口
+    │   │   ├── MultiRoom.java            //多人房间后台协议总入口
+    │   │   └── Util.java                 //通用后台协议总入口
     │   ├── logic
-    │   │   ├── IMMgr.java
-    │   │   ├── LiveUtil.java
-    │   │   └── RoomMgr.java
+    │   │   ├── IMMgr.java                //云通信逻辑实现
+    │   │   ├── LiveUtil.java             //流管理逻辑实现
+    │   │   └── RoomMgr.java              //房间管理实现
     │   ├── pojo
-    │   │   ├── Audience.java
-    │   │   ├── Pusher.java
+    │   │   ├── Audience.java             //观众结构定义
+    │   │   ├── Pusher.java               //推流者结构定义
     │   │   ├── Request
-    │   │   │   ├── AddAudienceReq.java
-    │   │   │   ├── AddPusherReq.java
-    │   │   │   ├── CreateGroupReq.java
-    │   │   │   ├── CreateRoomReq.java
-    │   │   │   ├── DelAudienceReq.java
-    │   │   │   ├── DeletePusherReq.java
-    │   │   │   ├── DestroyGroupReq.java
-    │   │   │   ├── DestroyRoomReq.java
-    │   │   │   ├── GetAudiencesReq.java
-    │   │   │   ├── GetCustomInfoReq.java
-    │   │   │   ├── GetLoginInfoReq.java
-    │   │   │   ├── GetPushersReq.java
-    │   │   │   ├── GetPushUrlReq.java
-    │   │   │   ├── GetRoomListReq.java
-    │   │   │   ├── NotifyPusherChangeReq.java
-    │   │   │   ├── PusherHeartbeatReq.java
-    │   │   │   └── SetCustomInfoReq.java
+    │   │   │   ├── AddAudienceReq.java          //增加观众请求定义
+    │   │   │   ├── AddPusherReq.java            //增加推流者请求定义
+    │   │   │   ├── CreateGroupReq.java          //建群请求定义，后台调用云通信rest api创建群组时候用到
+    │   │   │   ├── CreateRoomReq.java           //建房请求定义
+    │   │   │   ├── DelAudienceReq.java          //删除观众请求定义
+    │   │   │   ├── DeletePusherReq.java         //删除推流者请求定义
+    │   │   │   ├── DestroyGroupReq.java         //销毁群请求定义，后台调用云通信rest api销毁群组时候用到
+    │   │   │   ├── DestroyRoomReq.java          //销毁房间请求定义
+    │   │   │   ├── GetAudiencesReq.java         //获取观众列表请求定义
+    │   │   │   ├── GetCustomInfoReq.java        //获取直播房间自定义信息请求定义
+    │   │   │   ├── GetLoginInfoReq.java         //获取登录信息请求定义
+    │   │   │   ├── GetPushersReq.java           //获取推流者列表请求定义
+    │   │   │   ├── GetPushUrlReq.java           //获取推流地址请求定义
+    │   │   │   ├── GetRoomListReq.java          //获取房间列表请求定义
+    │   │   │   ├── NotifyPusherChangeReq.java   //通知推流者成员变化请求定义，后台调用云通信rest api发送群系统通知pusher变化的时候用到
+    │   │   │   ├── PusherHeartbeatReq.java      //pusher心跳请求定义
+    │   │   │   └── SetCustomInfoReq.java        //直播房间设置自定义信息请求定义
     │   │   ├── Response
-    │   │   │   ├── BaseRsp.java
-    │   │   │   ├── CreateRoomRsp.java
-    │   │   │   ├── GetAudiencesRsp.java
-    │   │   │   ├── GetCustomInfoRsp.java
-    │   │   │   ├── GetLoginInfoRsp.java
-    │   │   │   ├── GetPushUrlRsp.java
-    │   │   │   ├── GetRoomListRsp.java
-    │   │   │   ├── GetStreamStatusOutPut.java
-    │   │   │   ├── GetStreamStatusRsp.java
-    │   │   │   ├── GetTestPushUrlRsp.java
-    │   │   │   ├── GetTestRtmpAccUrlRsp.java
-    │   │   │   ├── LoginRsp.java
-    │   │   │   └── MergeStreamRsp.java
-    │   │   ├── Room.java
-    │   │   └── StreamIDS.java
+    │   │   │   ├── BaseRsp.java。               //回包通用定义
+    │   │   │   ├── CreateRoomRsp.java           //建房回包定义
+    │   │   │   ├── GetAudiencesRsp.java         //获取观众列表回包定义
+    │   │   │   ├── GetCustomInfoRsp.java        //获取直播房间设置自定义信息回包定义
+    │   │   │   ├── GetLoginInfoRsp.java         //获取登录信息回包定义
+    │   │   │   ├── GetPushUrlRsp.java           //获取推流地址回包定义
+    │   │   │   ├── GetRoomListRsp.java          //获取房间列表回包定义
+    │   │   │   ├── GetStreamStatusOutPut.java   //获取流状态回包定义
+    │   │   │   ├── GetStreamStatusRsp.java      //获取流状态回包定义，包含GetStreamStatusOutPut
+    │   │   │   ├── GetTestPushUrlRsp.java       //获取一组推流播放地址回包定义
+    │   │   │   ├── GetTestRtmpAccUrlRsp.java    //获取加速拉流地址回包定义
+    │   │   │   ├── LoginRsp.java                //登录回包定义
+    │   │   │   └── MergeStreamRsp.java          //混流回包定义
+    │   │   ├── Room.java                        //房间结构定义
+    │   │   └── StreamIDS.java                   //流id结构定义
     │   ├── service
-    │   │   ├── impl
-    │   │   │   ├── RoomServiceImpl.java
-    │   │   │   └── UtilServiceImpl.java
-    │   │   ├── RoomService.java
-    │   │   └── UtilService.java
+    │   │   ├── impl 
+    │   │   │   ├── RoomServiceImpl.java         //房间管理服务service实现
+    │   │   │   └── UtilServiceImpl.java         //通用service实现
+    │   │   ├── RoomService.java                 //房间管理服务service接口
+    │   │   └── UtilService.java                 //通用service接口
     │   ├── utils
-    │   │   ├── RestTemplateConfig.java
-    │   │   └──  Utils.java
+    │   │   ├── RestTemplateConfig.java          //http请求配置
+    │   │   └──  Utils.java                      //通用类
     ├── java/com/tls
     │   ├── base64_url
-    │   │   └── base64_url.java
-    │   ├── tls_sigature
-    │   │   └── tls_sigature.java
+    │   │   └── base64_url.java                  //base64编解码类
+    │   ├── tls_sigature   
+    │   │   └── tls_sigature.java                //云通信签名生成和校验类
     ├── resources
-    │   ├── applicationContext.xml
-    │   └── logback.xml
+    │   ├── applicationContext.xml               //spring配置文件
+    │   └── logback.xml                          //log配置文件
     └── webapp/WEB-INF
-        ├── dispatcher-servlet.xml
-        ├── web.xml
+        ├── dispatcher-servlet.xml               //spring配置文件
+        ├── web.xml                              //后台配置文件
         └── lib
 ```
 后台使用spring框架搭建，开发环境是IntelliJ IDEA，java需要使用1.8
