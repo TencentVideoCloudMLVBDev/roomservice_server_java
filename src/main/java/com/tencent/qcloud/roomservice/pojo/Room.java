@@ -64,7 +64,9 @@ public class Room extends BaseRsp {
 
     public void addPusher(Pusher pusher) {
         this.pusherMap.put(pusher.getUserID(), pusher);
-        this.pushers.add(pusher);
+        if (!this.pushers.contains(pusher)) {
+            this.pushers.add(pusher);
+        }
     }
 
     public void delPusher(String userID) {
