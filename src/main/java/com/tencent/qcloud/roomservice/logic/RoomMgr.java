@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -39,6 +40,9 @@ public class RoomMgr implements InitializingBean {
 
     @Autowired
     RestTemplate restTemplate;
+
+    @Resource
+    IMMgr imMgr;
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -258,9 +262,15 @@ public class RoomMgr implements InitializingBean {
         ConcurrentHashMap<String, Room> orgMap = getActuralMap(type);
         Room room = orgMap.get(roomID);
         if (room != null) {
-            room.delPusher(userID);
-            if (room.getPushersCnt() == 0) {
+            if (type == LIVE_ROOM && room.getRoomCreator().equals(userID)) {
                 orgMap.remove(roomID);
+                imMgr.destroyGroup(roomID);
+            } else {
+                room.delPusher(userID);
+                imMgr.notifyPushersChange(roomID);
+                if (room.getPushersCnt() == 0) {
+                    orgMap.remove(roomID);
+                }
             }
         }
     }
@@ -347,6 +357,8 @@ public class RoomMgr implements InitializingBean {
                 entity,
                 String.class);
 
+        log.info("getStreamStatus, streamID:" + streamID + ", response :" + response.getBody());
+
         // 错误
         if (response.getStatusCode().value() != HttpStatus.OK.value()) {
             log.warn("getStreamStatus出错, streamID: " + streamID + ", HttpCode: " + response.getStatusCode().value());
@@ -367,7 +379,6 @@ public class RoomMgr implements InitializingBean {
             return 0;
         }
 
-        log.warn("getStreamStatus, 流已经断开 streamID:" + streamID + ", response :" + response.getBody());
         return 1;
     }
 
