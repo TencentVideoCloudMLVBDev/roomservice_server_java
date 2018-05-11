@@ -1,18 +1,19 @@
 # 腾讯云音视频多人会话解决方案服务端
 
 ## 1.项目简介
-在构建直播业务，多人音视频业务等场景下，都需要后台配合完成诸如：
-- 生成直播地址，包括推流和播放地址
+RTCRoom Server 是配合 live-room（用于直播连麦）和 rtc-room（用于视频通话）的后台组件，主要作用有：
+
+- 生成推流、播放地址
 - 生成IM签名，用于IM独立模式下的用户登录
-- 管理IM聊天室，聊天室的创建和销毁还有成员进出通知
-- 双人/多人音视频管理视频位。
-以上这些都有一定的学习成本，为了**降低学习成本**，我们将后台封装了一套接口，来解决以上问题。再配合IOS，Android，小程序和Win PC端的后台调用封装。对应用开发者提供一套友好的接口，方便您实现多人实时音视频，直播，聊天等业务场景。
+- 管理IM聊天室，聊天室的创建和销毁、成员进出通知
+- 双人/多人音视频管理视频位
 
 **特别说明：**
-- [1] 后台没有对接口的调用做安全校验，这需要您结合您自己的账号和鉴权体系，诸如在请求接口上加一个Sig参数，内容是您账号鉴权体系派发的一个字符串，用于校验请求者的身份。**
-- [2] 房间管理采用 java对象直接在内存中进行管理。房间信息动态和实效性，因此没有采用数据库做持久存储，而是在内存中动态管理。**
 
-## 云服务开通
+- [1] 后台没有对接口的调用做安全校验，这需要您结合您自己的账号和鉴权体系，诸如在请求接口上加一个Sig参数，内容是您账号鉴权体系派发的一个字符串，用于校验请求者的身份。
+- [2] 房间管理采用 java对象直接在内存中进行管理。房间信息具有动态和实效性，因此没有采用数据库做持久存储，而是在内存中动态管理。
+
+## 2.云服务开通
 
 ### 开通直播服务
 
@@ -20,7 +21,6 @@
 进入 [直播管理控制台](https://console.cloud.tencent.com/live)，如果服务还没有开通，则会有如下提示:
 ![](https://mc.qcloudimg.com/static/img/c40ff3b85b3ad9c0cb03170948d93555/image.png)
 点击申请开通，之后会进入腾讯云人工审核阶段，审核通过后即可开通。
-
 
 #### 配置直播码
 直播服务开通后，进入【直播控制台】>【直播码接入】>【[接入配置](https://console.cloud.tencent.com/live/livecodemanage)】 完成相关配置，即可开启直播码服务：
@@ -36,7 +36,7 @@
 进入[云通讯管理控制台](https://console.cloud.tencent.com/avc)，如果还没有服务，直接点击**直接开通云通讯**按钮即可。新认证的腾讯云账号，云通讯的应用列表是空的，如下图：
 ![](https://mc.qcloudimg.com/static/img/c033ddba671a514c7b160e1c99a08b55/image.png)
 
-点击**创建应用接入**按钮创建一个新的应用接入，即您要接入腾讯云IM通讯服务的App的名字，我们的测试应用名称叫做“RTMPRoom演示”，如下图所示：
+点击**创建应用接入**按钮创建一个新的应用接入，即您要接入腾讯云IM通讯服务的App的名字，我们的测试应用名称叫做“RTMPRoom”，如下图所示：
 ![](https://mc.qcloudimg.com/static/img/96131ecccb09ef06e50aa0ac591b802d/yuntongxing1.png)
 
 点击确定按钮，之后就可以在应用列表中看到刚刚添加的项目了，如下图所示：
@@ -71,8 +71,8 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 PUBLICKEY也采用同样的方式编辑，供后续使用。
 
-## 修改配置信息
-后台使用spring框架搭建，开发环境是IntelliJ IDEA，java需要使用1.8。用IntelliJ IDEA导入工程源码，修改Config.java 中`APP_ID、APP_BIZID、PUSH_SECRET_KEY、APIKEY、IM_SDKAPPID、IM_ACCOUNTTYPE、ADMINISTRATOR、PRIVATEKEY、PUBLICKEY`等配置项需要您替换成腾讯云账号下的值。
+## 3.修改配置信息
+后台使用 spring 框架搭建，开发环境是 IntelliJ IDEA，java 需要使用 1.8。用 IntelliJ IDEA 导入工程源码，把 Config.java 中`APP_ID、APP_BIZID、PUSH_SECRET_KEY、APIKEY、IM_SDKAPPID、IM_ACCOUNTTYPE、ADMINISTRATOR、PRIVATEKEY、PUBLICKEY`等配置项替换成您的腾讯云账号信息。
 ```java
 public class Config {
 
@@ -134,18 +134,18 @@ public class Config {
          * 配置privateKey
          * 将private_key文件的内容按下面的方式填写到 PRIVATEKEY。
          */
-        public final static String PRIVATEKEY = "-----BEGIN PRIVATE KEY-----\n" +
-                "\n" +
-                "\n" +
-                "\n" +
-                "-----END PRIVATE KEY-----";
+        public final static String PRIVATEKEY = "-----BEGIN PRIVATE KEY-----\r\n"+
+			"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n"+
+			"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n"+
+			"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n"+
+			"-----END PRIVATE KEY-----\r\n";
         /**
          * 云通信 验证usersig 所用的公钥
          */
         public final static String PUBLICKEY = "-----BEGIN PUBLIC KEY-----\n" +
-                "\n" +
-                "\n" +
-                "-----END PUBLIC KEY-----\n";
+			"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n"+
+			"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n"+
+			"-----END PUBLIC KEY-----\n";
     }
 
 
@@ -199,22 +199,50 @@ public class Config {
     public final static boolean isCreatorDestroyRoom = false;
 }
 ```
-配置修改好之后打成war包。
+## 4.准备发布包
+配置修改好之后，选择 Build -> Build Artifacts 开始打包，打包完成后到输出路径拿到 roomservice.war 包。选择 File -> Project Structure 可以查看输出路径，如下图中的 E:\RoomService\rtcroom_server_java-master\target。
+![](https://main.qcloudimg.com/raw/bebbfc08e06ae652e42ed99b0c95635c.jpg)
 
-## 服务器部署
-以CentOS 系统为例，描述部署过程。采用CentOS + nginx + Apache Tomcat + java 的 环境。小程序和IOS都要求服务器支持HTTPS请求。和远程服务器通讯一般走ssh连接，可以用工具Xshell，secureCRT连接服务器。对于小文件（小于100kB）可以用rz 命令从本机传送文件至服务器，以及sz命令从远程服务器下载文件。非常方便。
+## 5.部署服务器
+以部署到腾讯云服务器为例，描述部署过程。采用CentOS + nginx + Apache Tomcat + java 的 环境。
 
-### 准备发布包
-Config.java中的配置修改好之后打成war包。
+> 注意：
+> jdk版本需要为1.8以上。
+> 小程序和ios都要求服务器支持HTTPS请求。
 
-### war包部署到服务器
-将打包好的roomservice.war包通过rz命令上传到服务器 tomcat 的 webapps 目录下。通过 tomcat/bin 目录下的 startup.sh 脚本启动 tomcat。 
+### 申请云服务器
+1、新建 CVM 主机。
+![](https://main.qcloudimg.com/raw/f677689d261e2e6741c3acf546d56b07.jpg)
+
+2、从服务市场选取镜像。
+![](https://main.qcloudimg.com/raw/7f1d7f00186cc7431164a06b9dfe6855.jpg)
+
+3、配置硬盘、网络、云主机访问密码，并且妥善保管好密码，然后设置安全组。
+![](https://main.qcloudimg.com/raw/e917c73c625f1e6850ad690b5dc71cef.jpg)
+
+4、付款后生成云主机。点击登录可以通过腾讯云的网页 shell 进行访问，也可以用 Filezilla 等工具登录到主机。
+![](https://main.qcloudimg.com/raw/ef80dc15a72ab96e09cc4deff7c9091b.jpg)
+
+5、查看/切换 JDK 版本。
+![](https://main.qcloudimg.com/raw/207f9ae83d29b7a33433863ef513c977.jpg)
+
+修改完成后可以用 `sh version.sh` 命令查看是否修改成功。
+使用 `sudo update-alternatives --display java` 命令可以查看当前已安装的 JDK 版本。
+![](https://main.qcloudimg.com/raw/e8b9035e58e067e2f6946e62b5828be5.jpg)
+
+### 部署war包到服务器
+将之前打包好的 roomservice.war 包上传到服务器 tomcat 的 webapps 目录下。和远程服务器通讯一般走 ssh 连接，可以通过 Filezilla 连接服务器。
+![](https://main.qcloudimg.com/raw/6aa89383dbe90abb929a76a09980a702.jpg)
+
+上传完成后，如果 tomcat 服务为启动，可以进入 tomcat/bin 目录，通过 ./startup.sh start 命令启动 tomcat。“Tomcat started.”表示服务启动成功。
+![](https://main.qcloudimg.com/raw/bffea3dc8071c61c97e622502dd54aed.jpg)
 
 ### nginx 配置
 如果您已经有**域名**以及域名对应的**SSL证书**存放在`/data/release/nginx/`目录下，请将下面配置内容中的
-- [1] 替换成您自己的域名，
-- [2-1] 替换成SSL证书的crt文件名，
-- [2-2] 替换成SSL证书的key文件名。
+- [1] 替换成您自己的域名。
+- [2-1] 替换成 SSL 证书的 crt 文件名。
+- [2-2] 替换成 SSL 证书的 key 文件名。
+
 ```
 upstream app_weapp {
     server localhost:5757;
@@ -259,25 +287,23 @@ server {
 ```
 nginx -s reload
 ```
-通过Postman访问接口，就可以看到返回的json数据了。注意要按照接口定义正确填写body。
-以双人房间建房为例，请求地址格式 https://您自己的域名/roomservice/weapp/double_room/create_room
 
+### 验证服务
+通过浏览器地址栏访问接口，请求地址格式 https://您自己的域名/roomservice/weapp/utils/get_login_info
 
-## 小程序和windows Demo部署
-1.小程序部署
-
-下载 [小程序](https://github.com/TencentVideoCloudMLVBDev/RTCRoomDemo) 源码，将wxlite/config.js文件中的`serverUrl`和 `roomServiceUrl`修改成:
+## 6.小程序和windows Demo部署
+#### 1.小程序部署
+下载 [小程序](https://github.com/TencentVideoCloudMLVBDev/RTCRoomDemo) 源码，将 wxlite/config.js 文件中的`serverUrl`和 `roomServiceUrl`修改成:
 ```
 https://您自己的域名/roomservice/
 ```
 
-2.windows Demo部署
-
-下载 [windows web demo](https://github.com/TencentVideoCloudMLVBDev/webexe_web) 源码，将liveroom.html、double.html文件中的`RoomServerDomain`修改成:
+#### 2.windows Demo部署
+下载 [windows web demo](https://github.com/TencentVideoCloudMLVBDev/webexe_web) 源码，将 liveroom.html、double.html 文件中的`RoomServerDomain`修改成:
 ```
 https://您自己的域名/roomservice/
 ```
 
-## 开发者资源
+## 7.开发者资源
 * [项目结构](https://github.com/TencentVideoCloudMLVBDev/rtcroom_server_java/blob/master/doc/codeStructure.md) - 后台源码结构
 * [协议文档](https://github.com/TencentVideoCloudMLVBDev/rtcroom_server_java/blob/master/doc/protocol.md) - 后台协议文档
