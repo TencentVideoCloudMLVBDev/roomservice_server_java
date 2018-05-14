@@ -18,36 +18,36 @@ RTCRoom Server 是配合 live-room（用于直播连麦）和 rtc-room（用于�
 
 #### 申请开通视频直播服务
 进入 [直播管理控制台](https://console.cloud.tencent.com/live)，如果服务还没有开通，则会有如下提示:
-![](https://mc.qcloudimg.com/static/img/c40ff3b85b3ad9c0cb03170948d93555/image.png)
+![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/live_open.png)
 点击申请开通，之后会进入腾讯云人工审核阶段，审核通过后即可开通。
 
 #### 配置直播码
 直播服务开通后，进入【直播控制台】>【直播码接入】>【[接入配置](https://console.cloud.tencent.com/live/livecodemanage)】 完成相关配置，即可开启直播码服务：
-![](https://mc.qcloudimg.com/static/img/32158e398ab9543b5ac3acf5f04aa86e/image.png)
+![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/live_code.png)
 点击【确定接入】按钮即可。
 
 #### 获取直播服务配置信息
 从直播控制台获取`APP_ID`、`APP_BIZID`、`API_KEY`，后面配置服务器会用到：
-![](https://main.qcloudimg.com/raw/b958c4d3ad29fd6114f92e0c8f7ca458.png)
+![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/live_config.png)
 
 ### 开通云通信服务
 #### 申请开通云通讯服务
 进入[云通讯管理控制台](https://console.cloud.tencent.com/avc)，如果还没有服务，直接点击**直接开通云通讯**按钮即可。新认证的腾讯云账号，云通讯的应用列表是空的，如下图：
-![](https://mc.qcloudimg.com/static/img/c033ddba671a514c7b160e1c99a08b55/image.png)
+![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/im_open.png)
 
 点击**创建应用接入**按钮创建一个新的应用接入，即您要接入腾讯云IM通讯服务的App的名字，我们的测试应用名称叫做“RTMPRoom”，如下图所示：
-![](https://mc.qcloudimg.com/static/img/96131ecccb09ef06e50aa0ac591b802d/yuntongxing1.png)
+![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/im_new.png)
 
 点击确定按钮，之后就可以在应用列表中看到刚刚添加的项目了，如下图所示：
-![](https://mc.qcloudimg.com/static/img/168928a60c0b4c07a2ee2c318e0b1a62/yuntongxing2.png)
+![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/im_list.png)
 
 #### 配置独立模式
 上图的列表中，右侧有一个**应用配置**按钮，点击这里进入下一步的配置工作，如下图所示。
-![](https://mc.qcloudimg.com/static/img/3e9cd34ca195036e21cb487014cc2c81/yuntongxing3.png)
+![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/im_config.png)
 
 #### 获取云通讯服务配置信息
 从云通信控制台获取`IM_SDKAPPID`、`IM_ACCOUNTTYPE`、`ADMINISTRATOR`、`PRIVATEKEY`、`PUBLICKEY`，后面配置服务器会用到：
-![](https://main.qcloudimg.com/raw/13ea29f1692106bafd9895e7624e167a.png)
+![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/im_config_info.png)
 
 从验证方式中下载公私钥，解压出来将private_key用文本编辑器打开，如：
 
@@ -200,7 +200,7 @@ public class Config {
 ```
 ## 4.准备发布包
 配置修改好之后，选择 Build -> Build Artifacts 开始打包，打包完成后到输出路径拿到 roomservice.war 包。选择 File -> Project Structure 可以查看输出路径，如下图中的 E:\RoomService\rtcroom_server_java-master\target。
-![](https://main.qcloudimg.com/raw/bebbfc08e06ae652e42ed99b0c95635c.jpg)
+![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/build_war.png)
 
 ## 5.部署服务器
 以部署到腾讯云服务器为例，描述部署过程。采用CentOS + nginx + Apache Tomcat + java 的 环境。
@@ -211,30 +211,30 @@ public class Config {
 
 ### 申请云服务器
 1、新建 CVM 主机。
-![](https://main.qcloudimg.com/raw/f677689d261e2e6741c3acf546d56b07.jpg)
+![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/new_cvm.png)
 
 2、从服务市场选取镜像。
-![](https://main.qcloudimg.com/raw/7f1d7f00186cc7431164a06b9dfe6855.jpg)
+![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/cvm_image.png)
 
 3、配置硬盘、网络、云主机访问密码，并且妥善保管好密码，然后设置安全组。
-![](https://main.qcloudimg.com/raw/e917c73c625f1e6850ad690b5dc71cef.jpg)
+![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/config_cvm.png)
 
 4、付款后生成云主机。点击登录可以通过腾讯云的网页 shell 进行访问，也可以用 Filezilla 等工具登录到主机。
-![](https://main.qcloudimg.com/raw/ef80dc15a72ab96e09cc4deff7c9091b.jpg)
+![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/cvm_info.png)
 
 5、查看/切换 JDK 版本。
-![](https://main.qcloudimg.com/raw/207f9ae83d29b7a33433863ef513c977.jpg)
+![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/change_jdk.png)
 
 修改完成后可以用 `sh version.sh` 命令查看是否修改成功。
 使用 `sudo update-alternatives --display java` 命令可以查看当前已安装的 JDK 版本。
-![](https://main.qcloudimg.com/raw/e8b9035e58e067e2f6946e62b5828be5.jpg)
+![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/check_jdk.png)
 
 ### 部署war包到服务器
 将之前打包好的 roomservice.war 包上传到服务器 tomcat 的 webapps 目录下。和远程服务器通讯一般走 ssh 连接，可以通过 Filezilla 连接服务器。
-![](https://main.qcloudimg.com/raw/6aa89383dbe90abb929a76a09980a702.jpg)
+![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/upload_war.png)
 
 上传完成后，如果 tomcat 服务为启动，可以进入 tomcat/bin 目录，通过 ./startup.sh start 命令启动 tomcat。“Tomcat started.”表示服务启动成功。
-![](https://main.qcloudimg.com/raw/bffea3dc8071c61c97e622502dd54aed.jpg)
+![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/start_tomcat.png)
 
 ### nginx 配置
 如果您已经有**域名**以及域名对应的**SSL证书**存放在`/data/release/nginx/`目录下，请将下面配置内容中的
