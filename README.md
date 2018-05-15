@@ -71,7 +71,8 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 PUBLICKEY也采用同样的方式编辑，供后续使用。
 
 ## 3.修改配置信息
-后台使用 spring 框架搭建，开发环境是 IntelliJ IDEA，java 需要使用 1.8。用 IntelliJ IDEA 导入工程源码，把 Config.java 中`APP_ID、APP_BIZID、PUSH_SECRET_KEY、APIKEY、IM_SDKAPPID、IM_ACCOUNTTYPE、ADMINISTRATOR、PRIVATEKEY、PUBLICKEY`等配置项替换成您的腾讯云账号信息。
+后台使用 spring 框架搭建，开发环境是 IntelliJ IDEA，java 需要使用 1.8。用 IntelliJ IDEA 导入工程源码，把`\src\main\java\com\tencent\qcloud\roomservice\common`目录下的 Config.java 中`APP_ID、APP_BIZID、PUSH_SECRET_KEY、APIKEY、IM_SDKAPPID、IM_ACCOUNTTYPE、ADMINISTRATOR、PRIVATEKEY、PUBLICKEY`等配置项替换成您的腾讯云账号信息。
+
 ```java
 public class Config {
 
