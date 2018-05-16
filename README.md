@@ -220,7 +220,6 @@ public class Config {
 3、配置硬盘、网络、云主机访问密码，并且妥善保管好密码，然后设置安全组。
 ![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/config_cvm.png)
 
-4、付款后生成云主机。点击登录可以通过腾讯云的网页 shell 进行访问，也可以用 Filezilla 等工具登录到主机。
 4、付款后生成云主机。点击登录可以通过腾讯云的网页 shell 进行访问。
 ![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/cvm_info.png)
 
