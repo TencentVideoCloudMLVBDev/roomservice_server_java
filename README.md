@@ -203,6 +203,9 @@ public class Config {
 配置修改好之后，选择 Build -> Build Artifacts 开始打包，打包完成后到输出路径拿到 roomservice.war 包。选择 File -> Project Structure 可以查看输出路径，如下图中的 E:\RoomService\rtcroom_server_java-master\target。
 ![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/build_war.png)
 
+<font color='red'>注意：roomservice.war 包解压后，里面是应该是 .class 的文件，否则说明打包有问题。</font>
+![](https://github.com/TencentVideoCloudMLVBDev/roomservice_server_java/raw/master/image/war_decompression.png)
+
 ## 5.部署服务器
 以部署到腾讯云服务器为例，描述部署过程。采用CentOS + nginx + Apache Tomcat + java 的 环境。
 
@@ -290,7 +293,7 @@ nginx -s reload
 ```
 
 ### 验证服务
-通过浏览器地址栏访问接口，请求地址格式 https://您自己的域名/roomservice/weapp/utils/get_login_info
+通过浏览器地址栏访问接口，请求地址格式<font color='red'>`https://您自己的域名/roomservice/weapp/utils/get_login_info`</font>，如果没有配置证书，可以用http请求来验证服务。
 
 ## 6.小程序和windows Demo部署
 #### 1.小程序部署
