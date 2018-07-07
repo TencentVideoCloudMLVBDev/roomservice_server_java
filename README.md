@@ -135,17 +135,17 @@ public class Config {
          * 将private_key文件的内容按下面的方式填写到 PRIVATEKEY。
          */
         public final static String PRIVATEKEY = "-----BEGIN PRIVATE KEY-----\r\n"+
-			"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n"+
-			"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n"+
-			"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n"+
-			"-----END PRIVATE KEY-----\r\n";
+            "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n"+
+            "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n"+
+            "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n"+
+            "-----END PRIVATE KEY-----\r\n";
         /**
          * 云通信 验证usersig 所用的公钥
          */
         public final static String PUBLICKEY = "-----BEGIN PUBLIC KEY-----\n" +
-			"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n"+
-			"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n"+
-			"-----END PUBLIC KEY-----\n";
+            "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n"+
+            "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\r\n"+
+            "-----END PUBLIC KEY-----\n";
     }
 
 
@@ -200,6 +200,11 @@ public class Config {
 }
 ```
 ## 4.准备发布包
+首先到 [IntelliJ IDEA 官网](https://www.jetbrains.com/idea/download/#section=windows) 下载  IntelliJ IDEA 工具，注意这里要选择 <font color='red'>Ultimate 版 </font>。因为只有 Ultimate 版本才拥有Java EE 相关插件以及功能。
+![](https://main.qcloudimg.com/raw/3cad5d08eb48255e39fcd304aa7c97e6.png)
+
+成功安装 IntelliJ IDEA，接着配置按照第 3 步讲述， 修改下配置信息。
+
 配置修改好之后，选择 Build -> Build Artifacts 开始打包，打包完成后到输出路径拿到 roomservice.war 包。选择 File -> Project Structure 可以查看输出路径，如下图中的 E:\RoomService\rtcroom_server_java-master\target。
 ![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/build_war.png)
 
