@@ -232,19 +232,24 @@ public class Config {
 ![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/cvm_info.png)
 
 5、查看/切换 JDK 版本。
-![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/change_jdk.png)
-
+![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/change_jdk_1.png)
+![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/change_jdk_2.png)
 修改完成后可以用 `sh version.sh` 命令查看是否修改成功。
 
 使用 `sudo update-alternatives --display java` 命令可以查看当前已安装的 JDK 版本。
 ![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/check_jdk.png)
 
 ### 部署war包到服务器
-将之前打包好的 roomservice.war 包上传到服务器 tomcat 的 webapps 目录下。和远程服务器通讯一般走 ssh 连接，可以通过 Filezilla 连接服务器。
+建议使用 FileZilla 或者 FlashFXP 等可视化界面工具。
 ![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/upload_war.png)
 
+将打包好的 webrtc.war 包上传 tomcat 的 webapps 目录下
+![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/upload_war_2.png)
+
+
+6、重新启动 tomcat。
 上传完成后，如果 tomcat 服务未启动，可以进入 tomcat/bin 目录，通过 ./startup.sh start 命令启动 tomcat。“Tomcat started.”表示服务启动成功。
-![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/start_tomcat.png)
+![](https://github.com/TencentVideoCloudMLVBDev/roomservice_java/raw/master/image/restart_tomcat.png)
 
 ### nginx 配置
 如果您已经有**域名**以及域名对应的**SSL证书**存放在`/data/release/nginx/`目录下，请将下面配置内容中的
