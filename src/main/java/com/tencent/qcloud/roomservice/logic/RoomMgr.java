@@ -371,7 +371,8 @@ public class RoomMgr implements InitializingBean {
         try {
             rsp = mapper.readValue(response.getBody(), GetStreamStatusRsp.class);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("解析getStreamStatus响应出错, streamID: " + streamID + ", response body: " + response.getBody(), e);
+            return 2;
         }
 
         // 推流中

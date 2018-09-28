@@ -96,6 +96,7 @@ public class RoomServiceImpl implements RoomService {
         rsp = roomMgr.getRoom(req.getRoomID(), type);
         log.info("getRoom, type: " + type + " , roomID: " + req.getRoomID() + ", pushers counts : " + (rsp == null? 0 : rsp.getPushersCnt()));
         if (rsp == null) {
+            rsp = new Room();
             rsp.setCode(1);
             rsp.setMessage("请求失败，房间不存在");
             log.error("getPushers失败:房间不存在：" + "userID：" + userID + ",roomID: " + req.getRoomID() + ",type: " + type);

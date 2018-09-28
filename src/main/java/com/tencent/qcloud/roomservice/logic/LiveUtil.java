@@ -42,17 +42,20 @@ public class LiveUtil {
      * 从推流地址中提取流ID，完整的(推流状态检查) + 去掉bizid前缀的(生成对应的播放地址)
      */
     public StreamIDS getStreamIdFromPushUrl(String pushUrl) {
-        int index = pushUrl.indexOf("?");
-        if (index == -1)
-            return null;
-        String substr = pushUrl.substring(0, index);
-        int index_2 = substr.lastIndexOf("/");
-        String streamID = substr.substring(index_2 + 1, index);
-        String prefix = Config.Live.APP_BIZID + "_";
-        String subID = streamID.substring(prefix.length(), streamID.length());
         StreamIDS ids = new StreamIDS();
-        ids.setStreamID(streamID);
-        ids.setSubID(subID);
+        int index = pushUrl.indexOf("?");
+        if (index == -1) {
+            ids.setStreamID("");
+            ids.setSubID("");
+        } else {
+            String substr = pushUrl.substring(0, index);
+            int index_2 = substr.lastIndexOf("/");
+            String streamID = substr.substring(index_2 + 1, index);
+            String prefix = Config.Live.APP_BIZID + "_";
+            String subID = streamID.substring(prefix.length(), streamID.length());
+            ids.setStreamID(streamID);
+            ids.setSubID(subID);
+        }
         return ids;
     }
 
