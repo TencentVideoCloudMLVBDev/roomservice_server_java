@@ -65,7 +65,7 @@ public class LiveUtil {
      */
     public String genMixedPlayUrl(String subID, String suffix) {
         String liveCode = Config.Live.APP_BIZID + "_" + subID;
-        return "https://" + Config.Live.PLAYHOST + "/live/" + liveCode + "." + suffix;
+        return "http://" + Config.Live.PLAYHOST + "/live/" + liveCode + "." + suffix;
     }
 
     /**
