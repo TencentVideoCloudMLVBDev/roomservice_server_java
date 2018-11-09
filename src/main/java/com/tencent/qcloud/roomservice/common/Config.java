@@ -32,6 +32,10 @@ public class Config {
 
         // 云直播 推流有效期单位秒 默认7天
         public final static int validTime = 3600 * 24 * 7;
+        // 云直播 播放域名。https://console.cloud.tencent.com/live/domainmanage
+        public final static String PLAYHOST = "";
+        // 云直播 推流域名。https://console.cloud.tencent.com/live/domainmanage
+        public final static String PUSHHOST = "";
     }
 
     /**

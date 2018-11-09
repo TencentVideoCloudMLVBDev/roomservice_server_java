@@ -33,7 +33,7 @@ public class LiveUtil {
         String liveCode = Config.Live.APP_BIZID + "_" + userID;
         String txSecret = Utils.getMD5(Config.Live.PUSH_SECRET_KEY + liveCode + Long.toHexString(txTime).toUpperCase());
         String ext = "?bizid=" + Config.Live.APP_BIZID + "&txSecret=" + txSecret + "&txTime=" + Long.toHexString(txTime).toUpperCase();
-        String pushUrl = "rtmp://" + Config.Live.APP_BIZID + ".livepush.myqcloud.com/live/" + liveCode + ext;
+        String pushUrl = "rtmp://" + Config.Live.PUSHHOST + "/live/" + liveCode + ext;
         log.info("genPushUrl , url: " + pushUrl);
         return pushUrl;
     }
@@ -65,7 +65,7 @@ public class LiveUtil {
      */
     public String genMixedPlayUrl(String subID, String suffix) {
         String liveCode = Config.Live.APP_BIZID + "_" + subID;
-        return "https://" + Config.Live.APP_BIZID + ".liveplay.myqcloud.com/live/" + liveCode + "." + suffix;
+        return "https://" + Config.Live.PLAYHOST + "/live/" + liveCode + "." + suffix;
     }
 
     /**
@@ -82,7 +82,7 @@ public class LiveUtil {
         String liveCode = Config.Live.APP_BIZID + "_" + subID;
         String txSecret = Utils.getMD5(Config.Live.PUSH_SECRET_KEY + liveCode + Long.toHexString(txTime).toUpperCase());
         String ext = "?bizid=" + Config.Live.APP_BIZID + "&txSecret=" + txSecret + "&txTime=" + Long.toHexString(txTime).toUpperCase();
-        String accPlayUrl = "rtmp://" + Config.Live.APP_BIZID + ".liveplay.myqcloud.com/live/" + liveCode + ext;
+        String accPlayUrl = "rtmp://" + Config.Live.PLAYHOST + "/live/" + liveCode + ext;
         return accPlayUrl;
     }
 
@@ -95,11 +95,11 @@ public class LiveUtil {
         String liveCode = Config.Live.APP_BIZID + "_" + userID;
         String txSecret = Utils.getMD5(Config.Live.PUSH_SECRET_KEY + liveCode + Long.toHexString(txTime).toUpperCase());
         String ext = "?bizid=" + Config.Live.APP_BIZID + "&txSecret=" + txSecret + "&txTime=" + Long.toHexString(txTime).toUpperCase();
-        String pushUrl = "rtmp://" + Config.Live.APP_BIZID + ".livepush.myqcloud.com/live/" + liveCode + ext;
-        String flvPlayUrl = "http://" + Config.Live.APP_BIZID + ".liveplay.myqcloud.com/live/" + liveCode + ".flv";
-        String rtmpPlayUrl = "rtmp://" + Config.Live.APP_BIZID + ".liveplay.myqcloud.com/live/" + liveCode;
-        String hlsPlayUrl = "http://" + Config.Live.APP_BIZID + ".liveplay.myqcloud.com/live/" + liveCode + ".m3u8";
-        String accPlayUrl = "rtmp://" + Config.Live.APP_BIZID + ".liveplay.myqcloud.com/live/" + liveCode + ext;
+        String pushUrl = "rtmp://" + Config.Live.PUSHHOST + "/live/" + liveCode + ext;
+        String flvPlayUrl = "http://" + Config.Live.PLAYHOST + "/live/" + liveCode + ".flv";
+        String rtmpPlayUrl = "rtmp://" + Config.Live.PLAYHOST + "/live/" + liveCode;
+        String hlsPlayUrl = "http://" + Config.Live.PLAYHOST + "/live/" + liveCode + ".m3u8";
+        String accPlayUrl = "rtmp://" + Config.Live.PLAYHOST + "/live/" + liveCode + ext;
         rsp.setUrl_push(pushUrl);
         rsp.setUrl_play_flv(flvPlayUrl);
         rsp.setUrl_play_rtmp(rtmpPlayUrl);
